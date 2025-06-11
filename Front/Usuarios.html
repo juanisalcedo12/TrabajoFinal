@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crear Usuario</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; }
+    input, button { display: block; width: 100%; margin-bottom: 10px; padding: 8px; }
+    #respuesta { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Crear nuevo usuario</h2>
+  <form id="formUsuario">
+    <input type="text" id="nombre" placeholder="Nombre" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Contraseña" required />
+    <input type="number" id="saldo" placeholder="Saldo ARS inicial" required />
+    <button type="submit">Crear Usuario</button>
+  </form>
+
+  <div id="respuesta"></div>
+
+  <script src="usuario.js"></script>
+</body>
+</html>
