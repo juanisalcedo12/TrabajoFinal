@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Historial de Transacciones</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 1000px; margin: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    #mensaje { font-weight: bold; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>Historial de Transacciones</h2>
+  <button onclick="cargarTransacciones()">Actualizar</button>
+  <div id="mensaje"></div>
+  <table id="tablaTransacciones" style="display: none;">
+    <thead>
+      <tr>       
+        <th>Usuario</th>
+        <th>Cripto</th>
+        <th>Exchange</th>
+        <th>Acción</th>
+        <th>Cantidad</th>
+        <th>Monto ARS</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody id="transaccionesBody"></tbody>
+  </table>
+
+  <script src="transacciones.js"></script>
+</body>
+</html>

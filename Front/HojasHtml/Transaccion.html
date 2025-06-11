@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Transacción</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    input, select, button { display: block; width: 100%; margin-bottom: 12px; padding: 10px; }
+    #respuesta { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <h2>Registrar Transacción</h2>
+
+  <form id="formTransaccion">
+    <select id="usuarioId" required>
+      <option value="">Seleccione un usuario</option>
+    </select>
+
+    <input type="text" id="cryptoCode" placeholder="Código Cripto (ej: BTC, ETH)" required />
+
+    <select id="exchangeId" required>
+      <option value="">Seleccione un Exchange</option>
+    </select>
+
+    <select id="action" required>
+      <option value="purchase">Compra</option>
+      <option value="sale">Venta</option>
+    </select>
+
+    <input type="number" step="0.0001" id="cryptoAmount" placeholder="Cantidad de Cripto" required />
+    <input type="datetime-local" id="fechaHora" required />
+
+    <button type="submit">Enviar Transacción</button>
+  </form>
+
+  <div id="respuesta"></div>
+
+  <script src="transaccion.js"></script>
+</body>
+</html>

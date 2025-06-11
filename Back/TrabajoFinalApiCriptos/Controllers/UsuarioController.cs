@@ -40,6 +40,16 @@ namespace TrabajoFinalApiCriptos.Controllers
             return Ok(new { usuario.Id, usuario.Nombre, usuario.Email, usuario.SaldoARS });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetUsuarios()
+        {
+            var usuario = await _context.Usuarios
+                .Select(u => new { u.Id, u.Nombre })
+                .ToListAsync();
+
+            return Ok(usuario);
+        }
+
         [HttpGet("wallet-status/{usuarioId}")]
         public async Task<IActionResult> GetWalletStatus(int usuarioId)
         {
