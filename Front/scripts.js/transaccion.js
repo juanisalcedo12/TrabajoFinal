@@ -1,57 +1,81 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Asegura que todo el DOM está cargado
+  cargarCriptomonedas();
   cargarExchanges();
   cargarUsuarios();
-});
 
-document.getElementById("formTransaccion").addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  const transaccion = {
-    usuarioId: parseInt(document.getElementById("usuarioId").value),
-    cryptoCode: document.getElementById("cryptoCode").value.trim(),
-    exchangeId: parseInt(document.getElementById("exchangeId").value),
-    action: document.getElementById("action").value,
-    cryptoAmount: parseFloat(document.getElementById("cryptoAmount").value),
-    fechaHora: document.getElementById("fechaHora").value
-  };
-
+  const form = document.getElementById("formTransaccion");
   const respuestaDiv = document.getElementById("respuesta");
 
-  try {
-    const res = await fetch("https://localhost:7244/api/transaccion", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(transaccion)
-    });
-
-    let data;
-    try {
-      data = await res.json();
-    } catch {
-      data = await res.text();
-    }
-
-    if (res.ok) {
-      respuestaDiv.style.color = "green";
-      respuestaDiv.textContent = `✅ Transacción registrada. ID: ${data.id}, Monto ARS: $${data.montoARS}`;
-    } else {
-      respuestaDiv.style.color = "red";
-      respuestaDiv.textContent = `❌ Error: ${data.error || data}`;
-    }
-
-  } catch (err) {
-    respuestaDiv.style.color = "red";
-    respuestaDiv.textContent = `❌ Error de red: ${err.message}`;
+  if (!form) {
+    console.error("⚠️ No se encontró el formulario con id='formTransaccion'");
+    return;
   }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const transaccion = {
+      usuarioId: parseInt(document.getElementById("usuarioId").value),
+      cryptoCode: document.getElementById("cripto").value.trim(),
+      exchangeId: parseInt(document.getElementById("exchangeId").value),
+      action: document.getElementById("action").value,
+      cryptoAmount: parseFloat(document.getElementById("cryptoAmount").value),
+      fechaHora: document.getElementById("fechaHora").value
+    };
+
+    try {
+      const res = await fetch("https://localhost:7244/api/transaccion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(transaccion)
+      });
+
+      const raw = await res.text();
+      let data;
+
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        data = raw;
+      }
+
+      if (res.ok) {
+        respuestaDiv.textContent = `✅ Transacción realizada. ID: ${data.id}, Monto ARS: $${data.montoARS}`;
+      } else {
+        respuestaDiv.textContent = `❌ Error: ${data}`;
+      }
+
+    } catch (err) {
+      respuestaDiv.textContent = `❌ Error de red: ${err.message}`;
+    }
+  });
 });
 
-async function cargarExchanges() {
-  const select = document.getElementById("exchangeId");
+// Funciones auxiliares
+async function cargarCriptomonedas() {
+  try {
+    const res = await fetch("https://localhost:7244/api/criptomoneda");
+    const criptos = await res.json();
 
+    const select = document.getElementById("cripto");
+    criptos.forEach(c => {
+      const option = document.createElement("option");
+      option.value = c.codigo;
+      option.textContent = ` ${c.codigo.toUpperCase()}`;
+      select.appendChild(option);
+    });
+  } catch (err) {
+    console.error("❌ Error al cargar criptomonedas:", err.message);
+  }
+}
+
+async function cargarExchanges() {
   try {
     const res = await fetch("https://localhost:7244/api/exchange");
     const exchanges = await res.json();
 
+    const select = document.getElementById("exchangeId");
     exchanges.forEach(e => {
       const option = document.createElement("option");
       option.value = e.id;
@@ -64,17 +88,15 @@ async function cargarExchanges() {
 }
 
 async function cargarUsuarios() {
-  const select = document.getElementById("usuarioId");
-
   try {
-   const res = await fetch("https://localhost:7244/api/usuario");
-
+    const res = await fetch("https://localhost:7244/api/usuario");
     const usuarios = await res.json();
 
+    const select = document.getElementById("usuarioId");
     usuarios.forEach(u => {
       const option = document.createElement("option");
       option.value = u.id;
-      option.textContent = `${u.nombre}`;
+      option.textContent = u.nombre;
       select.appendChild(option);
     });
   } catch (err) {

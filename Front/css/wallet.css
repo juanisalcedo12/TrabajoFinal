@@ -1,0 +1,58 @@
+/* === Estilos para wallet.html === */
+
+.main-wallet {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+#mensaje {
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #ff4c4c;
+}
+
+#resultado {
+  margin-top: 20px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1c1c1c;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,255,195,0.1);
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+th {
+  background-color: #00ffc3;
+  color: #111;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #242424;
+}
+
+tr:hover {
+  background-color: #2a2a2a;
+}
+
+h3, h4 {
+  text-align: center;
+  color: #00ffc3;
+}
+
+#saldoArs, #totalArs {
+  font-weight: bold;
+  color: #00ffc3;
+}

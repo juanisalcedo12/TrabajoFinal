@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <title>Registrar Transacción</title>
  <link rel="stylesheet" href="../css/styles.css">
+ <link rel="stylesheet" href="../css/transaccion.css">
 </head>
 <body>
-     <header>
-  <nav style="background-color: #333; padding: 15px;">
-    <a href="Usuarios.html" style="color: white; margin-right: 20px;">Crear Usuario</a>
-    <a href="transaccion.html" style="color: white; margin-right: 20px;">Crear Transacción</a>
-    <a href="index.html" style="color: white; margin-right: 20px; text-decoration: none;">Inicio</a>
-    <a href="transacciones.html" style="color: white; margin-right: 20px;">Historial</a>
-    <a href="wallet.html" style="color: white; margin-right: 20px;">Estado de Cartera</a>
+  <header>
+  <nav class="navbar">
+    <a href="index.html">Inicio</a>
+    <a href="Usuarios.html">Crear Usuario</a>
+    <a href="transaccion.html">Crear Transacción</a>
+    <a href="transacciones.html">Historial</a>
+    <a href="wallet.html">Estado de Cartera</a>
   </nav>
-</header>
+  </header>
 
   <h2>Registrar Transacción</h2>
 
@@ -23,7 +24,8 @@
       <option value="">Seleccione un usuario</option>
     </select>
 
-    <input type="text" id="cryptoCode" placeholder="Código Cripto (ej: BTC, ETH)" required />
+    <label for="cripto">Criptomoneda</label>
+    <select id="cripto" required></select>  
 
     <select id="exchangeId" required>
       <option value="">Seleccione un Exchange</option>
